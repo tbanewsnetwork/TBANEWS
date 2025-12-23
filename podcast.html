@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liberia Today | Podcast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* FULL CSS - INCLUDING NAVIGATION STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #00205b 0%, #0066cc 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+            color: #ffcc00;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ffcc00;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffcc00;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #00205b 0%, #0066cc 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Podcast Specific Styles */
+        .podcast-hero {
+            background: linear-gradient(rgba(0, 32, 91, 0.85), rgba(0, 102, 204, 0.8)), url('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+        
+        .podcast-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .podcast-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        /* Podcast Player Styles */
+        .podcast-player {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+        
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .player-header h3 {
+            color: #00205b;
+            font-size: 1.5rem;
+        }
+        
+        .subscribe-btn {
+            background-color: #ffcc00;
+            color: #00205b;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .subscribe-btn:hover {
+            background-color: #00205b;
+            color: #ffcc00;
+            transform: translateY(-2px);
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .play-btn {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            background-color: #00205b;
+            transform: scale(1.05);
+        }
+        
+        .episode-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .episode-thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .episode-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .episode-details h4 {
+            color: #00205b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .episode-meta {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Podcast Episodes Grid */
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .episode-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .episode-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .episode-content {
+            padding: 1.5rem;
+        }
+        
+        .episode-content h3 {
+            color: #00205b;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        .episode-content p {
+            color: #555;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        
+        .episode-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .episode-duration {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .listen-btn {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .listen-btn:hover {
+            background-color: #00205b;
+        }
+        
+        /* Podcast Hosts */
+        .hosts-section {
+            margin: 4rem 0;
+        }
+        
+        .hosts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .host-card {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .host-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 4px solid #ffcc00;
+        }
+        
+        .host-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .host-card h4 {
+            color: #00205b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .host-role {
+            color: #0066cc;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        /* Common Styles */
+        .btn {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #00205b;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #00205b;
+            color: #ffcc00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #00205b;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #ffcc00;
+            display: inline-block;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #00205b;
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: #ffcc00;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffcc00;
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: #ffcc00;
+            color: #00205b;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .podcast-hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #00205b;
+                display: none;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+            }
+            
+            nav li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                padding: 1rem;
+                border-radius: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .player-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .episode-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .podcast-hero {
+                padding: 3rem 1rem;
+            }
+            
+            .podcast-hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hosts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-globe-africa"></i>
+                <h1>TBA<span>News</span></h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="music.html">Music</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="podcast.html" class="active">Podcast</a></li>
+                    <li><a href="video.html">Video</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Liberia Today Podcast</h1>
+            <p>Listen to conversations with influential Liberians, discussing issues that shape our nation. Deep dives into culture, politics, and innovation.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Podcast Hero -->
+        <section class="podcast-hero">
+            <h2>Amplifying Liberian Voices</h2>
+            <p>Join us for insightful conversations with leaders, creators, and changemakers from across Liberia. Available on all major podcast platforms.</p>
+            <a href="#" class="btn">
+                <i class="fas fa-podcast"></i> Subscribe Now
+            </a>
+        </section>
+
+        <!-- Featured Podcast Player -->
+        <section class="podcast-player">
+            <div class="player-header">
+                <h3>Now Playing: <span id="currentEpisode">The Future of Liberian Education</span></h3>
+                <button class="subscribe-btn">
+                    <i class="fas fa-rss"></i> Subscribe
+                </button>
+            </div>
+            
+            <div class="episode-info">
+                <div class="episode-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1524178234883-043d5c3f3cf4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Education Podcast">
+                </div>
+                <div class="episode-details">
+                    <h4>Episode 42: Reimagining Education in Liberia</h4>
+                    <p>Education Minister David B. Doe discusses the new curriculum reforms, challenges in rural schools, and plans for digital learning initiatives.</p>
+                    <div class="episode-meta">
+                        <span><i class="far fa-calendar"></i> March 18, 2024</span>
+                        <span><i class="fas fa-user"></i> Host: Miatta Sherman</span>
+                        <span><i class="far fa-clock"></i> 54 min</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Audio Player -->
+            <div class="audio-player">
+                <div style="background: #e9ecef; height: 4px; border-radius: 2px; margin: 1rem 0;">
+                    <div style="width: 30%; background: #0066cc; height: 100%; border-radius: 2px;"></div>
+                </div>
+                <div class="player-controls">
+                    <button class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div style="flex-grow: 1; margin: 0 1rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #666;">
+                            <span>12:45</span>
+                            <span>54:20</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button style="background: none; border: none; color: #666; margin: 0 0.5rem; cursor: pointer;">
+                            <i class="fas fa-backward"></i>
+                        </button>
+                        <button style="background: none; border: none; color: #666; margin: 0 0.5rem; cursor: pointer;">
+                            <i class="fas fa-forward"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Episodes -->
+        <section>
+            <h2 class="section-title">Recent Episodes</h2>
+            
+            <div class="episodes-grid">
+                <div class="episode-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Entrepreneurship" class="episode-image">
+                    <div class="episode-content">
+                        <h3>Liberian Tech Entrepreneurs Changing the Game</h3>
+                        <p>Meet the founders of three successful tech startups based in Monrovia. We discuss challenges, opportunities, and the future of technology in Liberia.</p>
+                        <div class="episode-footer">
+                            <span class="episode-duration"><i class="far fa-clock"></i> 48 min</span>
+                            <button class="listen-btn">Listen Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="episode-card">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Culture" class="episode-image">
+                    <div class="episode-content">
+                        <h3>Preserving Liberian Cultural Heritage</h3>
+                        <p>An interview with cultural anthropologist Dr. Fatima B. Johnson about efforts to document and preserve traditional Liberian customs and practices.</p>
+                        <div class="episode-footer">
+                            <span class="episode-duration"><i class="far fa-clock"></i> 62 min</span>
+                            <button class="listen-btn">Listen Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="episode-card">
+                    <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Healthcare" class="episode-image">
+                    <div class="episode-content">
+                        <h3>Healthcare Innovations in Rural Liberia</h3>
+                        <p>Dr. Samuel K. Morris shares how mobile clinics and telemedicine are transforming healthcare access in remote areas of Liberia.</p>
+                        <div class="episode-footer">
+                            <span class="episode-duration"><i class="far fa-clock"></i> 51 min</span>
+                            <button class="listen-btn">Listen Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="episode-card">
+                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Education" class="episode-image">
+                    <div class="episode-content">
+                        <h3>The State of Higher Education in Liberia</h3>
+                        <p>University presidents discuss challenges and opportunities facing Liberia's higher education system in the 21st century.</p>
+                        <div class="episode-footer">
+                            <span class="episode-duration"><i class="far fa-clock"></i> 67 min</span>
+                            <button class="listen-btn">Listen Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Podcast Hosts -->
+        <section class="hosts-section">
+            <h2 class="section-title">Meet Your Hosts</h2>
+            
+            <div class="hosts-grid">
+                <div class="host-card">
+                    <div class="host-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Miatta Sherman">
+                    </div>
+                    <h4>Miatta Sherman</h4>
+                    <p class="host-role">Lead Host & Producer</p>
+                    <p>Journalist with 15+ years experience covering West African affairs. Former BBC Africa correspondent.</p>
+                </div>
+                
+                <div class="host-card">
+                    <div class="host-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Samuel G. Weah">
+                    </div>
+                    <h4>Samuel G. Weah</h4>
+                    <p class="host-role">Political Analyst</p>
+                    <p>Political scientist and author specializing in Liberian governance and democratic institutions.</p>
+                </div>
+                
+                <div class="host-card">
+                    <div class="host-avatar">
+                        <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Fatima B. Johnson">
+                    </div>
+                    <h4>Fatima B. Johnson</h4>
+                    <p class="host-role">Cultural Correspondent</p>
+                    <p>Cultural anthropologist focused on preserving and promoting Liberian heritage and traditions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscribe Section -->
+        <section style="text-align: center; margin: 4rem 0;">
+            <h2 class="section-title">Subscribe & Listen Anywhere</h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                Never miss an episode! Subscribe to Liberia Today Podcast on your favorite platform.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn" style="background-color: #9146FF; color: white;">
+                    <i class="fab fa-spotify"></i> Spotify
+                </button>
+                <button class="btn" style="background-color: #FF2D55; color: white;">
+                    <i class="fab fa-apple"></i> Apple Podcasts
+                </button>
+                <button class="btn" style="background-color: #FF8800; color: white;">
+                    <i class="fab fa-google"></i> Google Podcasts
+                </button>
+                <button class="btn" style="background-color: #000; color: white;">
+                    <i class="fas fa-rss"></i> RSS Feed
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Liberia Today</h3>
+                    <p>Your premier source for Liberian news, culture, and entertainment. Connecting Liberians worldwide through authentic storytelling.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61576663875309"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/tbanewsnetwork"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/tbanewsnetwork/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@TBANewsNetwork"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/in/iamsdwjr" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="news.html">Latest News</a></li>
+                        <li><a href="music.html">Music Library</a></li>
+                        <li><a href="blog.html">Cultural Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Manhattan, New York</li>
+                        <li><i class="fas fa-phone"></i> (347) 640 - 4912</li>
+                        <li><i class="fas fa-envelope"></i> SDWSR.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 TBA News Networks. All rights reserved. | Celebrating Liberian Culture & Progress</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Podcast Player Functionality
+        const playBtn = document.querySelector('.play-btn');
+        let isPlaying = false;
+        
+        playBtn.addEventListener('click', function() {
+            isPlaying = !isPlaying;
+            const icon = this.querySelector('i');
+            
+            if (isPlaying) {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                this.style.backgroundColor = '#00205b';
+            } else {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                this.style.backgroundColor = '#0066cc';
+            }
+        });
+        
+        // Listen buttons for episodes
+        document.querySelectorAll('.listen-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const episodeCard = this.closest('.episode-card');
+                const episodeTitle = episodeCard.querySelector('h3').textContent;
+                
+                // Update featured player
+                document.getElementById('currentEpisode').textContent = episodeTitle;
+                
+                // Change play button to indicate new episode
+                const featuredPlayBtn = document.querySelector('.player-controls .play-btn i');
+                featuredPlayBtn.classList.remove('fa-pause');
+                featuredPlayBtn.classList.add('fa-play');
+                
+                // Show notification
+                alert(`Now playing: ${episodeTitle}`);
+            });
+        });
+        
+        // Subscribe buttons
+        document.querySelectorAll('.subscribe-btn, .btn').forEach(button => {
+            if (button.textContent.includes('Subscribe') || button.textContent.includes('Spotify') || 
+                button.textContent.includes('Apple') || button.textContent.includes('Google') || 
+                button.textContent.includes('RSS')) {
+                
+                button.addEventListener('click', function() {
+                    const platform = this.textContent.trim();
+                    alert(`Redirecting to ${platform}...\n\nIn a real implementation, this would open the subscription page.`);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
